@@ -1,25 +1,26 @@
+using Api;
+using ExceptionCatcherMiddleware.Api;
+using NotIlya.Extensions.SerilogExtensions;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
+IServiceCollection services = builder.Services;
+ConfigurationManager config = builder.Configuration;
 
-// Add services to the container.
+services.AddExceptionCatcherMiddlewareServices();
+services.AddConfiguredSerilog(config.GetAddConfigurationOptions("Serilog"));
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddControllers().AddApplicationPart(typeof(ProductController).Assembly);
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSerilogRequestLogging();
+app.UseExceptionCatcherMiddleware();
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.MapControllers();
 
 app.Run();
