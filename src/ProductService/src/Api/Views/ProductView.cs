@@ -14,9 +14,4 @@ public class ProductView
         Price = price;
         Type = type;
     }
-
-    public ProductView()
-    {
-        
-    }
 }

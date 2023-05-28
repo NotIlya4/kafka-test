@@ -20,13 +20,6 @@ public class ProductController : ControllerBase
         _repository = repository;
         _mapper = mapper;
     }
-    
-    [HttpGet]
-    public async Task<ActionResult> Test()
-    {
-        _logger.LogInformation("Hello");
-        return NoContent();
-    }
 
     [HttpPut]
     public async Task Put([FromBody] ProductView product)

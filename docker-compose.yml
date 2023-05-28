@@ -12,3 +12,5 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=1tsJusT@S@mpleP@ssword!
+    ports:
+      - 1433:1433

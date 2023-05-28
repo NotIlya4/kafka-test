@@ -21,6 +21,8 @@ services.AddSwaggerGen();
 
 WebApplication app = builder.Build();
 
+await app.ConfigureDb(config.AutoMigrate());
+
 app.UseSerilogRequestLogging();
 app.UseExceptionCatcherMiddleware();
 
