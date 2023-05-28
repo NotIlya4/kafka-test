@@ -12,7 +12,7 @@ ConfigurationManager config = builder.Configuration;
 
 services.AddExceptionCatcherMiddlewareServices();
 services.NAddSerilog(config.GetNAddSerilogOptions("Serilog"));
-// services.NAddEfSqlServer<AppDbContext>(config.GetNAddEfSqlServerOptions("SqlServer"));
+services.NAddEfSqlServer<AppDbContext>(config.GetNAddEfSqlServerOptions("SqlServer"));
 services.AddServices();
 
 services.AddControllers().AddApplicationPart(typeof(ProductController).Assembly);
