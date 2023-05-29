@@ -10,7 +10,7 @@ public class ProductDataConfig : IEntityTypeConfiguration<ProductData>
     {
         builder.HasKey(p => p.Id);
 
-        builder.HasIndex(p => p.Name);
+        builder.HasIndex(p => p.Name).IsUnique();
 
         builder.Property(p => p.Price).HasColumnType("decimal(19,4)");
     }
