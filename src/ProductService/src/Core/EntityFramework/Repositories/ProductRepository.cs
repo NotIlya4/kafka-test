@@ -27,6 +27,13 @@ public class ProductRepository : IProductRepository
         return _mapper.MapProduct(data);
     }
 
+    public async Task Remove(Guid id)
+    {
+        ProductData productData = await _dbContext.Products.FirstAsync(p => p.Id == id.ToString());
+        _dbContext.Remove(productData);
+        await _dbContext.SaveChangesAsync();
+    }
+
     public async Task Add(Product product)
     {
         ProductData data = _mapper.MapProduct(product);

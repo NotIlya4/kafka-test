@@ -27,6 +27,14 @@ public class ProductController : ControllerBase
         await _repository.Put(_mapper.MapProduct(product));
     }
 
+    [HttpDelete]
+    [Route("id/{id}")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        await _repository.Remove(id);
+        return NoContent();
+    }
+
     [HttpGet]
     public async Task<List<ProductView>> Get()
     {
