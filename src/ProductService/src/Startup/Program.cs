@@ -1,8 +1,9 @@
 using Api;
 using Core.EntityFramework;
 using ExceptionCatcherMiddleware.Api;
-using NotIlya.Extensions.EntityFrameworkExtensions;
-using NotIlya.Extensions.SerilogExtensions;
+using NotIlya.Extensions.Configuration;
+using NotIlya.Extensions.Serilog;
+using NotIlya.Extensions.SqlServer;
 using Serilog;
 using Startup.Extensions;
 
@@ -11,8 +12,8 @@ IServiceCollection services = builder.Services;
 ConfigurationManager config = builder.Configuration;
 
 services.AddExceptionCatcherMiddlewareServices();
-services.NAddSerilog(config.GetNAddSerilogOptions("Serilog"));
-services.NAddEfSqlServer<AppDbContext>(config.GetNAddEfSqlServerOptions("SqlServer"));
+services.AddSerilog(config.GetAddSerilogOptions("Serilog"));
+services.AddEfSqlServer<AppDbContext>(config.GetAddEfSqlServerOptions("SqlServer"));
 services.AddServices();
 
 services.AddControllers().AddApplicationPart(typeof(ProductController).Assembly);

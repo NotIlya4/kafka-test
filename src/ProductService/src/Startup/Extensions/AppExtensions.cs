@@ -1,6 +1,6 @@
 ﻿using Core.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using NotIlya.Extensions;
+using NotIlya.Extensions.ServiceProvider;
 
 namespace Startup.Extensions;
 

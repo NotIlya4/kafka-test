@@ -1,12 +1,12 @@
-﻿using Core.EntityFramework.Models;
+﻿using Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Core.EntityFramework.Configurations;
 
-public class ProductDataConfig : IEntityTypeConfiguration<ProductData>
+public class ProductDataConfig : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<ProductData> builder)
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(p => p.Id);
 
