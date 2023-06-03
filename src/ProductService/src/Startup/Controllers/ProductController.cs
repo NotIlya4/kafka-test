@@ -1,5 +1,6 @@
 ﻿using Core.Domain.Entities;
 using Core.EntityFramework.Repositories;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api;
@@ -9,16 +10,18 @@ namespace Api;
 public class ProductController : ControllerBase
 {
     private readonly IProductRepository _repository;
+    private readonly IProductService _service;
 
-    public ProductController(IProductRepository repository)
+    public ProductController(IProductRepository repository, IProductService service)
     {
         _repository = repository;
+        _service = service;
     }
 
     [HttpPost]
-    public async Task<ActionResult> Add([FromBody] CreateProductRequestView request)
+    public async Task<ActionResult> Add([FromBody] CreateProductRequest request)
     {
-        await _repository.Add(new Product(id: 0, name: request.Name, price: request.Price, type: request.Type));
+        await _service.Add(request);
         return NoContent();
     }
 
@@ -26,7 +29,7 @@ public class ProductController : ControllerBase
     [Route("update")]
     public async Task<ActionResult> Update([FromBody] Product product)
     {
-        await _repository.Update(product);
+        await _service.Update(product);
         return NoContent();
     }
 
@@ -41,8 +44,7 @@ public class ProductController : ControllerBase
     [HttpGet]
     public async Task<List<Product>> Get()
     {
-        List<Product> products = await _repository.Get();
-        return products;
+        return await _service.Get();
     }
 
     [HttpGet]
