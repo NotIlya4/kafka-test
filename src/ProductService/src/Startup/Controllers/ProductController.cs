@@ -9,12 +9,10 @@ namespace Api;
 [ApiController]
 public class ProductController : ControllerBase
 {
-    private readonly IProductRepository _repository;
     private readonly IProductService _service;
 
-    public ProductController(IProductRepository repository, IProductService service)
+    public ProductController(IProductService service)
     {
-        _repository = repository;
         _service = service;
     }
 
@@ -35,9 +33,9 @@ public class ProductController : ControllerBase
 
     [HttpDelete]
     [Route("id/{id}")]
-    public async Task<ActionResult> Delete(int id)
+    public async Task<ActionResult> Remove(int id)
     {
-        await _repository.Remove(id);
+        await _service.Remove(id);
         return NoContent();
     }
 
@@ -51,7 +49,7 @@ public class ProductController : ControllerBase
     [Route("id/{id}")]
     public async Task<Product> GetById(int id)
     {
-        Product product = await _repository.GetById(id);
+        Product product = await _service.GetById(id);
         return product;
     }
 }

@@ -14,6 +14,7 @@ ConfigurationManager config = builder.Configuration;
 services.AddExceptionCatcherMiddlewareServices();
 services.AddSerilog(config.GetAddSerilogOptions("Serilog"));
 services.AddEfSqlServer<AppDbContext>(config.GetAddEfSqlServerOptions("SqlServer"));
+services.AddConfiguredKafka(config.GetKafkaBroker());
 services.AddServices();
 
 services.AddControllers().AddApplicationPart(typeof(ProductController).Assembly);

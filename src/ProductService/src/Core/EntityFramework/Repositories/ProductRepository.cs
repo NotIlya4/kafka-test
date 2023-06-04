@@ -22,6 +22,11 @@ public class ProductRepository : IProductRepository
         return await _dbContext.Products.FirstAsync(p => p.Id == id);
     }
 
+    public async Task<Product> GetByName(string name)
+    {
+        return await _dbContext.Products.FirstAsync(p => p.Name == name);
+    }
+
     public async Task Remove(int id)
     {
         _dbContext.Remove(await GetById(id));
