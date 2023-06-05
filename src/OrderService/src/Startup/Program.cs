@@ -1,4 +1,3 @@
-using Api;
 using Core.EntityFramework;
 using ExceptionCatcherMiddleware.Api;
 using NotIlya.Extensions.Configuration;
@@ -23,8 +22,8 @@ services.AddSwaggerGen();
 
 WebApplication app = builder.Build();
 
+await app.StartKafkaBus();
 await app.ConfigureDb(config.AutoMigrate());
-
 app.UseSerilogRequestLogging();
 app.UseExceptionCatcherMiddleware();
 
