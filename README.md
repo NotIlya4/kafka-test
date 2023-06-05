@@ -3,4 +3,4 @@ In this project i want to simulate typical microservice behavior when one servic
 
 This repository consist of 2 services. Product service can create new products. Product entity contains id, name, price, brand. Order service want to have access to product id and price. So instead of directly asking product service for a price of specific product order service will listen to kafka topic that will be used by product service that emits new messages when new product created.
 
-Currently WIP.
+Currently WIP. 
